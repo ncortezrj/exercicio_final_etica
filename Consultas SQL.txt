@@ -1,0 +1,197 @@
+﻿-- EXECUTANDO TUDO EM 'SQL 1'
+--
+-- Na linha 1:
+SELECT * from sim2022 limit 100
+-- Resulto: 100 linhas retornadas em 138 ms
+-- EXECUTANDO TUDO EM 'SQL 1'
+–
+* Consultar colunas de obito, municipio e causa do óbito
+
+
+- Na linha 1:
+SELECT DTOBITO, CODMUNRES, CAUSABAS from sim2022 limit 100
+-- Resulto: 100 linhas retornadas em 8 ms
+-- EXECUTANDO SELEÇÃO EM 'SQL 1'
+--
+-- Na linha 2:
+as
+-- Resulto: near "as": syntax error
+-- EXECUTANDO TUDO EM 'SQL 1'
+--
+-- Na linha 1:
+SELECT 
+        DTOBITO as data_obito, 
+        CODMUNRES as cod_mun_res, 
+        CAUSABAS as causa_cid10 
+from sim2022 
+limit 100
+-- Resulto: 100 linhas retornadas em 19 ms
+-- EXECUTANDO TUDO EM 'SQL 1'
+--
+-- Na linha 1:
+SELECT 
+        DTOBITO as data_obito, 
+        CODMUNRES as cod_mun_res, 
+        CAUSABAS as causa_cid10 
+from sim2022 
+WHERE 
+        CODMUNRES = 410690
+        OR
+        CODMUNRES = 3550308
+-- Resulto: 13242 linhas retornadas em 298 ms
+-- EXECUTANDO SELEÇÃO EM 'SQL 1'
+--
+-- Na linha 1:
+SELECT 
+        DTOBITO as data_obito, 
+        CODMUNRES as cod_mun_res, 
+        CAUSABAS as causa_cid10 
+from sim2022 
+WHERE 
+        (CODMUNRES = 410690 OR CODMUNRES = 3550308)
+        AND
+        CAUSABAS like 'C%'
+-- Resulto: 2591 linhas retornadas em 197 ms
+-- EXECUTANDO TUDO EM 'SQL 1'
+--
+-- Na linha 1:
+SELECT 
+        DTOBITO as data_obito, 
+        CODMUNRES as cod_mun_res, 
+        CAUSABAS as causa_cid10 
+from sim2022 
+WHERE 
+        (CODMUNRES = 410690 OR CODMUNRES = 3550308)
+        AND
+        CAUSABAS like '%C%'
+-- Resulto: 2591 linhas retornadas em 197 ms
+-- EXECUTANDO TUDO EM 'SQL 1'
+--
+-- Na linha 1:
+SELECT 
+        DTOBITO as data_obito, 
+        CODMUNRES as cod_mun_res, 
+        CAUSABAS as causa_cid10 
+from sim2022 
+WHERE 
+        (cod_mun_res = 410690 OR cod_mun_res = 3550308)
+        AND
+        CAUSABAS like 'C%'
+-- Resulto: 2591 linhas retornadas em 198 ms
+-- EXECUTANDO TUDO EM 'SQL 1'
+--
+
+
+* Consulta para verificar total de registros da tabela sim2022
+
+
+SELECT 
+        count(*) as total_obitos
+FROM sim2022
+-- Resulto: 1 linhas retornadas em 250 ms
+-- EXECUTANDO TUDO EM 'SQL 1'
+--
+-- Na linha 1:
+SELECT 
+        CAUSABAS as causa_cid10,
+        count(*) as total_obitos
+FROM sim2022
+GROUP by causa_cid10
+order by total_obitos DESC
+-- Resulto: 5473 linhas retornadas em 8223 ms
+-- EXECUTANDO TUDO EM 'SQL 1'
+--
+-- Na linha 1:
+SELECT * FROM cid10 limit 10
+-- Resulto: 10 linhas retornadas em 16 ms
+-- EXECUTANDO TUDO EM 'SQL 1'
+--
+-- Na linha 1:
+SELECT 
+        substr (CAUSABAS, 1, 3) as causa_cid10,
+        count(*) as total_obitos
+FROM sim2022
+GROUP by causa_cid10
+order by total_obitos DESC
+-- Resulto: 1367 linhas retornadas em 8376 ms
+-- EXECUTANDO TUDO EM 'SQL 1'
+--
+-- Na linha 1:
+SELECT 
+        CODMUNRES as cod_mun_res,
+        count(*) as total_obitos_infarto
+from sim2022
+where substr (CAUSABAS, 1, 3) = 'I21'
+GROUP by cod_mun_res
+order by  total_obitos_infarto desc
+-- Resulto: 5168 linhas retornadas em 1241 ms
+-- EXECUTANDO TUDO EM 'SQL 1'
+--
+-- Na linha 1:
+CREATE VIEW obitos_infarto AS
+SELECT 
+        CODMUNRES as cod_mun_res,
+        count(*) as total_obitos_infarto
+from sim2022
+where substr (CAUSABAS, 1, 3) = 'I21'
+GROUP by cod_mun_res
+order by  total_obitos_infarto desc
+-- Resulto: consulta executada com sucesso. Levou 2ms
+-- EXECUTANDO TUDO EM 'SQL 1'
+--
+-- Na linha 1:
+SELECT 
+        CODMUNRES as cod_mun_res,
+        count(*) as total_obitos_infarto
+from sim2022
+where substr (CAUSABAS, 1, 3) = 'I21'
+GROUP by cod_mun_res
+order by  total_obitos_infarto desc
+-- Resulto: 5168 linhas retornadas em 1279 ms
+-- EXECUTANDO TUDO EM 'SQL 1'
+--
+-- Na linha 1:
+SELECT 
+        CODMUNRES cod_mun_res,
+        count(*) total_obitos_infarto
+from sim2022
+where substr (CAUSABAS, 1, 3) = 'I21'
+GROUP by cod_mun_res
+order by  total_obitos_infarto desc
+-- Resulto: 5168 linhas retornadas em 1233 ms
+-- EXECUTANDO TUDO EM 'SQL 1'
+--
+-- Na linha 1:
+SELECT * from municipios limit 100
+-- Resulto: 100 linhas retornadas em 11 ms
+-- EXECUTANDO TUDO EM 'SQL 1'
+--
+-- Na linha 1:
+SELECT 
+        o.total_obitos_infarto,
+        m.state as UF,
+        m.city as municipio,
+FROM
+-- Resulto: near "FROM": syntax error
+-- EXECUTANDO TUDO EM 'SQL 1'
+--
+-- Na linha 1:
+SELECT 
+        o.total_obitos_infarto,
+        m.state as UF,
+        m.city as municipio
+FROM obitos_infarto as o
+        Left JOIN municipios as m
+                on o.codigo_municipio = substr(m.city_ibge_code, 1, 6)
+-- Resulto: no such column: o.codigo_municipio
+-- EXECUTANDO TUDO EM 'SQL 1'
+--
+-- Na linha 1:
+SELECT 
+        o.total_obitos_infarto,
+        m.state as UF,
+        m.city as municipio
+FROM obitos_infarto as o
+        Left JOIN municipios as m
+                on o.cod_mun_res = substr(m.city_ibge_code, 1, 6)
+-- Resulto: 5168 linhas retornadas em 4626 ms
